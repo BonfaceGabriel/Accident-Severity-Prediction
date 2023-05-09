@@ -1,0 +1,10 @@
+
+  <h2>Predict Accident Severity</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Predict</button>
+  </form>
+  {% if prediction %}
+    <p>Accident severity: {{ prediction }}</p>
+  {% endif %}
