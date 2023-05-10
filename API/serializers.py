@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Severity
+#from .models import Severity
 
 class severitySerializers(serializers.Serializer):
     distance = serializers.FloatField()
