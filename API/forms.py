@@ -1,20 +1,15 @@
 from django import forms
 
-class PredictionForm(forms.Form):
-    distance = forms.FloatField()
-    start_longitude = forms.FloatField()
-    start_latitude = forms.FloatField()
-    crossing_false = forms.FloatField()
-    crossing_true = forms.FloatField()
-    Traffic_Calming_false = forms.FloatField()
-    Traffic_Calming_true = forms.FloatField()
-    humidity = forms.FloatField()
-    precipitation = forms.FloatField()
-    give_way_false = forms.FloatField()
-    give_way_true = forms.FloatField()
-    stop_true = forms.FloatField()
-    stop_false = forms.FloatField()
-    amenity_false = forms.FloatField()
-    amenity_true = forms.FloatField()
-    bump_false = forms.FloatField()
-    bump_true = forms.FloatField()
+class SeverityForm(forms.Form):
+    Start_Lng = forms.FloatField(label='Start Longitude')
+    Start_Lat = forms.FloatField(label='Start Latitude')
+    Humidity = forms.FloatField(label='Humidity(%)')
+    Distance = forms.FloatField(label='Distance(mi)')
+    Precipitation = forms.FloatField(label='Precipitation(in)')
+
+    Stop = forms.BooleanField(label='Stop', required=False)
+    Give_Way = forms.BooleanField(label='Give Way', required=False)
+    Amenity = forms.BooleanField(label='Amenity', required=False)
+    Traffic_Calming = forms.BooleanField(label='Traffic Calming', required=False)
+    Crossing = forms.BooleanField(label='Crossing', required=False)
+    Bump = forms.BooleanField(label='Bump', required=False)

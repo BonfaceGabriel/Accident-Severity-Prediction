@@ -2,30 +2,43 @@ from django.shortcuts import render
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .serializers import severitySerializers
+from .serializers import RawDataSerializer
 from .mlModel import model
-from .forms import PredictionForm
+from .forms import SeverityForm
+from .preprocessing import preprocess_data
+from .models import RawData
 
-# Create your views here.
+
+
 @api_view(['GET', 'POST'])
 def ml_predict(request):
    if request.method == 'GET':
-      form = PredictionForm()
+      form = SeverityForm()
+      #serializer = RawDataSerializer(queryset, many=True)
       return render(request, 'predict.html', {'form': form})
    
    if request.method == 'POST':
-      form = PredictionForm(request.POST)
-      if form.is_valid():
-         serializers = severitySerializers(data = form.cleaned_data)
-         if serializers.is_valid():
-            input_data = serializers.validated_data
-            prediction = model.predict([list(input_data.values())])
-            return render(request, 'predict.html', {'form': form, 'prediction': prediction})
+         form = SeverityForm(request.POST)
+         if form.is_valid():
+           data = {
+                'Start_Lng': form.cleaned_data['Start_Lng'],
+                'Start_Lat': form.cleaned_data['Start_Lat'],
+                'Humidity': form.cleaned_data['Humidity'],
+                'Distance': form.cleaned_data['Distance'],
+                'Precipitation': form.cleaned_data['Precipitation'],
+                'Stop': form.cleaned_data['Stop'],
+                'Give_Way': form.cleaned_data['Give_Way'],
+                'Amenity': form.cleaned_data['Amenity'],
+                'Traffic_Calming': form.cleaned_data['Traffic_Calming'],
+                'Crossing': form.cleaned_data['Crossing'],
+                'Bump': form.cleaned_data['Bump']
+            }
+           preprocessed_data = preprocess_data(data)
+           prediction = model.predict(preprocessed_data)
+           return render(request, 'result.html', {'prediction': prediction})
          else:
-            return render(request, 'predict.html', {'form': form, 'errors': serializers.errors})
-      else:
-         return render(request, 'predict.html', {'form': form}) 
-         
+            return render(request, 'predict.html', {'form': form})
+      
     
 
    

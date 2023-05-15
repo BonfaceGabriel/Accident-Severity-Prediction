@@ -1,23 +1,7 @@
 from rest_framework import serializers
-#from .models import Severity
+from .models import RawData
 
-class severitySerializers(serializers.Serializer):
-    distance = serializers.FloatField()
-    start_longitude = serializers.FloatField()
-    start_latitude = serializers.FloatField()
-    crossing_false = serializers.FloatField()
-    crossing_true = serializers.FloatField()
-    Traffic_Calming_false = serializers.FloatField()
-    Traffic_Calming_true = serializers.FloatField()
-    humidity = serializers.FloatField()
-    precipitation = serializers.FloatField()
-    give_way_false = serializers.FloatField()
-    give_way_true = serializers.FloatField()
-    stop_true = serializers.FloatField()
-    stop_false = serializers.FloatField()
-    amenity_false = serializers.FloatField()
-    amenity_true = serializers.FloatField()
-    bump_false = serializers.FloatField()
-    bump_true = serializers.FloatField()
-    
-        
+class RawDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RawData
+        fields = ['Start_Lng', 'Start_Lat', 'Humidity', 'Distance', 'Precipitation', 'Stop', 'Give_Way', 'Amenity', 'Traffic_Calming', 'Crossing', 'Bump']

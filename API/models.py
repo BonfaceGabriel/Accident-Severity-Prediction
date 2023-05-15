@@ -1,18 +1,15 @@
 from django.db import models
 
 
-# Create your models here.
-
-# class Severity(models.Model):
-#     distance = models.FloatField()
-#     start_lng = models.FloatField()
-#     pressure = models.FloatField()
-#     start_lat = models.FloatField()
-#     windspeed = models.FloatField()
-#     humidity = models.FloatField()
-#     precipitation = models.FloatField()
-#     junction = models.BooleanField()
-#     give_way = models.BooleanField()
-#     traffic_signal = models.BooleanField()
-#     stop = models.BooleanField()
-
+class RawData(models.Model):
+    Start_Lng = models.FloatField()
+    Start_Lat = models.FloatField()
+    Humidity = models.FloatField()
+    Distance = models.FloatField()
+    Precipitation = models.FloatField()
+    Stop = models.BooleanField()
+    Give_Way = models.BooleanField()
+    Amenity = models.BooleanField()
+    Traffic_Calming = models.BooleanField()
+    Crossing = models.BooleanField()
+    Bump = models.BooleanField()
