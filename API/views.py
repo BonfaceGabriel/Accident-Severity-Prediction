@@ -38,12 +38,24 @@ def ml_predict(request):
 
            prediction = model.predict(preprocessed_data)
            prediction = prediction[0]
-           
+
            return render(request, 'result.html', {'prediction': prediction})
          
          else:
             return render(request, 'predict.html', {'form': form})
       
     
-
+@api_view(['GET', 'POST'])
+def get_prediction_endpoint(request):
    
+   if request.method == 'POST':
+         
+         user_input = request.data['user_input']
+           
+         preprocessed_data = preprocess_data(user_input)
+
+         prediction = model.predict(preprocessed_data)
+         
+         prediction = prediction[0]
+         
+         return Response({'prediction': prediction})

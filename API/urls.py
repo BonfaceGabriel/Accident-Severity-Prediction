@@ -20,5 +20,6 @@ from . import views
 
 
 urlpatterns = [
-    path('predict/', views.ml_predict)
+    path('predict/', views.ml_predict),
+    path('predictions/', views.get_prediction_endpoint)
 ]
