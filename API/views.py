@@ -23,9 +23,9 @@ def ml_predict(request):
            data = {
                 'Start_Lng': form.cleaned_data['Start_Lng'],
                 'Start_Lat': form.cleaned_data['Start_Lat'],
-                'Humidity': form.cleaned_data['Humidity'],
-                'Distance': form.cleaned_data['Distance'],
-                'Precipitation': form.cleaned_data['Precipitation'],
+                'Humidity(%)': form.cleaned_data['Humidity'],
+                'Distance(mi)': form.cleaned_data['Distance'],
+                'Precipitation(in)': form.cleaned_data['Precipitation'],
                 'Stop': form.cleaned_data['Stop'],
                 'Give_Way': form.cleaned_data['Give_Way'],
                 'Amenity': form.cleaned_data['Amenity'],
@@ -33,9 +33,14 @@ def ml_predict(request):
                 'Crossing': form.cleaned_data['Crossing'],
                 'Bump': form.cleaned_data['Bump']
             }
+           
            preprocessed_data = preprocess_data(data)
+
            prediction = model.predict(preprocessed_data)
+           prediction = prediction[0]
+           
            return render(request, 'result.html', {'prediction': prediction})
+         
          else:
             return render(request, 'predict.html', {'form': form})
       

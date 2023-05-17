@@ -1,5 +1,5 @@
 from joblib import load
 
 
-model = load('API/model.joblib')
+model = load('models/model.joblib')
 
