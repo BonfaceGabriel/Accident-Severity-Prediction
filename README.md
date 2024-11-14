@@ -22,4 +22,4 @@ Once you have all the requirements installed you run the app:
 python manage.py runserver
 ```
 ### Use
-The user then enters variables on a form then click on a predict button to reveal the severity.
+The user enters variables in a form, clicks on a predict button to reveal the severity.
